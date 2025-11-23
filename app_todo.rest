@@ -58,3 +58,47 @@ Content-Type: application/json
     "newPassword": "{{password}}"
 }
 ###
+
+## Todos
+## ---------------------------------
+
+# @name PostTodo
+POST {{BaseUrl}}/todos
+Authorization: {{bearerToken}}
+Content-Type: application/json
+
+{
+    "title": "Belajar PBO Malam Minggu",
+    "description": "Mempelajari dasar-dasar PBO untuk pengembangan aplikasi web."
+}
+###
+
+# @name GetAllTodos
+GET {{BaseUrl}}/todos
+Authorization: {{bearerToken}}
+###
+
+# @name GetAllTodosWithSearch
+GET {{BaseUrl}}/todos?search=Minggu
+Authorization: {{bearerToken}}
+###
+
+## Mengambil ID Todo pertama dari response GetAllTodos
+@todoId = {{GetAllTodos.response.body.data.todos[0].id}}
+
+# @name PutTodoById
+PUT {{BaseUrl}}/todos/{{todoId}}
+Content-Type: application/json
+Authorization: {{bearerToken}}
+
+{
+    "title": "Belajar Spring Boot Lanjutan",
+    "description": "Mempelajari fitur-fitur lanjutan Spring Boot.",
+    "isFinished": true
+}
+###
+
+# @name DeleteTodoById
+DELETE {{BaseUrl}}/todos/{{todoId}}
+Authorization: {{bearerToken}}
+###
